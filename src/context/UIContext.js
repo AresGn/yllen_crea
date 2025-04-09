@@ -1,0 +1,1 @@
+import React, { createContext, useContext, useState } from 'react';export const UIContext = createContext();export const UIProvider = ({ children }) => {const [state, setState] = useState({});return <UIContext.Provider value={{ state, setState }}>{children}</UIContext.Provider>;}; 

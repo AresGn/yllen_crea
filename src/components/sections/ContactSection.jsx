@@ -1,0 +1,56 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { WhatsAppButton } from '../shared/WhatsAppButton';
+
+const ContactSection = () => {
+  return (
+    <section id="contact" className="contact-section">
+      <div className="container">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="section-title"
+        >
+          Contact
+        </motion.h2>
+        
+        <div className="contact-content">
+          <motion.div 
+            className="contact-info"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <h3>Besoin d'information ou envie de passer commande?</h3>
+            <p>
+              N'hésitez pas à me contacter directement via WhatsApp pour discuter 
+              de vos projets personnalisés, poser des questions ou passer commande.
+            </p>
+            <p>
+              Je suis disponible pour vous accompagner dans la création d'un objet 
+              unique qui correspond parfaitement à vos attentes.
+            </p>
+            
+            <div className="contact-button-container">
+              <WhatsAppButton phoneNumber="+22963918285" message="Bonjour, je suis intéressé(e) par vos créations en résine." />
+            </div>
+          </motion.div>
+          
+          <motion.div 
+            className="contact-image"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <img src="/assets/images/products/autres/contact-image.jpg" alt="Contactez Yllen Créa" />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export { ContactSection }; 

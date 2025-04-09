@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Card = styled(motion.div)`
   background-color: white;
@@ -24,7 +26,7 @@ const Card = styled(motion.div)`
       position: absolute;
       top: 10px;
       right: 10px;
-      background-color: #b78846;
+      background-color: var(--primary-color);
       color: white;
       padding: 3px 10px;
       font-size: 0.7rem;
@@ -40,14 +42,14 @@ const ImageContainer = styled.div`
   height: 220px;
   overflow: hidden;
   
-  img {
+  img, .lazy-load-image-background {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
   }
   
-  ${Card}:hover & img {
+  ${Card}:hover & img, ${Card}:hover & .lazy-load-image-background {
     transform: scale(1.05);
   }
 `;
@@ -77,7 +79,7 @@ const CardDescription = styled.p`
 const CardLink = styled.a`
   display: inline-block;
   text-decoration: none;
-  color: #b78846;
+  color: var(--primary-color);
   font-weight: 600;
   font-size: 0.9rem;
   align-self: flex-start;
@@ -90,7 +92,7 @@ const CardLink = styled.a`
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #b78846;
+    background-color: var(--primary-color);
     transition: width 0.3s ease;
   }
   
@@ -109,7 +111,13 @@ export const ProductCard = ({
   return (
     <Card featured={featured}>
       <ImageContainer>
-        <img src={image} alt={title} />
+        <LazyLoadImage
+          src={image}
+          alt={title}
+          effect="blur"
+          threshold={300}
+          placeholderSrc={`${image}?width=20`}
+        />
       </ImageContainer>
       <CardContent>
         <CardTitle>{title}</CardTitle>

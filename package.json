@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "optimize-images": "node scripts/optimize-images.js",
+    "extract-critical-css": "node scripts/extract-critical-css.js"
   },
   "dependencies": {
     "framer-motion": "^10.16.4",
@@ -29,6 +31,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "globals": "^13.24.0",
+    "puppeteer": "^21.0.0",
+    "sharp": "^0.33.1",
     "vite": "^4.4.5"
   }
 }

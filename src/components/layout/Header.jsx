@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Navigation } from './Navigation';
 import styled from 'styled-components';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -31,7 +33,7 @@ const Logo = styled(motion.div)`
   display: flex;
   align-items: center;
   
-  img {
+  img, .lazy-load-image-background {
     height: 40px;
     
     @media (max-width: 768px) {
@@ -76,7 +78,12 @@ export const Header = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <img src="/assets/images/products/autres/logo.png" alt="Yllen Créa Logo" />
+        <LazyLoadImage
+          src="/assets/images/products/autres/logo.png"
+          alt="Yllen Créa Logo"
+          effect="blur"
+          height={40}
+        />
         <h1>Yllen Créa</h1>
       </Logo>
       

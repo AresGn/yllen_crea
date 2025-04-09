@@ -25,14 +25,14 @@ const NavItem = styled.li`
   
   a {
     text-decoration: none;
-    color: #333;
+    color: var(--text-dark);
     font-weight: 500;
     font-size: 1rem;
     transition: color 0.3s ease;
     position: relative;
     
     &:hover {
-      color: #b78846; // Couleur dorée pour représenter la résine
+      color: var(--primary-color);
     }
     
     &::after {
@@ -42,7 +42,7 @@ const NavItem = styled.li`
       left: 0;
       width: 0;
       height: 2px;
-      background-color: #b78846;
+      background-color: var(--primary-color);
       transition: width 0.3s ease;
     }
     
@@ -109,13 +109,13 @@ const MobileMenu = styled(motion.div)`
     
     a {
       text-decoration: none;
-      color: #333;
+      color: var(--text-dark);
       font-weight: 500;
       font-size: 1.2rem;
       transition: color 0.3s ease;
       
       &:hover {
-        color: #b78846;
+        color: var(--primary-color);
       }
     }
   }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { WhatsAppButton } from '../shared/WhatsAppButton';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ContactSection = () => {
   return (
@@ -45,7 +47,12 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <img src="/assets/images/products/autres/contact-image.jpg" alt="Contactez Yllen Créa" />
+            <LazyLoadImage
+              src="/assets/images/products/autres/contact-image.jpg"
+              alt="Contactez Yllen Créa"
+              effect="blur"
+              threshold={300}
+            />
           </motion.div>
         </div>
       </div>

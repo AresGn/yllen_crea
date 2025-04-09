@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export const AboutSection = () => {
   return (
@@ -22,7 +24,12 @@ export const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <img src="/assets/images/products/autres/about-image.jpg" alt="Fondatrice Yllen Créa" />
+            <LazyLoadImage
+              src="/assets/images/products/autres/about-image.jpg"
+              alt="Fondatrice Yllen Créa"
+              effect="blur"
+              threshold={300}
+            />
           </motion.div>
 
           <motion.div 

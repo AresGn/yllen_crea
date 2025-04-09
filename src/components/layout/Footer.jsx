@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { WhatsAppButton } from '../shared/WhatsAppButton';
 
 const FooterContainer = styled.footer`
-  background-color: #f8f5f0;
+  background-color: var(--background-light);
   padding: 3rem 2rem 1.5rem;
-  color: #333;
+  color: var(--text-dark);
 `;
 
 const FooterContent = styled.div`
@@ -36,7 +36,7 @@ const FooterSection = styled.div`
       bottom: -8px;
       width: 40px;
       height: 2px;
-      background-color: #b78846;
+      background-color: var(--primary-color);
       
       @media (max-width: 768px) {
         left: 50%;
@@ -55,11 +55,11 @@ const FooterSection = styled.div`
       
       a {
         text-decoration: none;
-        color: #555;
+        color: var(--text-medium);
         transition: color 0.2s ease;
         
         &:hover {
-          color: #b78846;
+          color: var(--primary-color);
         }
       }
     }
@@ -67,7 +67,7 @@ const FooterSection = styled.div`
   
   p {
     line-height: 1.6;
-    color: #555;
+    color: var(--text-medium);
   }
 `;
 
@@ -87,12 +87,12 @@ const SocialIcons = styled.div`
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: #e8e2d6;
-    color: #555;
+    background-color: var(--background-white);
+    color: var(--text-medium);
     transition: all 0.3s ease;
     
     &:hover {
-      background-color: #b78846;
+      background-color: var(--primary-color);
       color: white;
       transform: translateY(-3px);
     }
@@ -103,9 +103,9 @@ const Copyright = styled.div`
   text-align: center;
   padding-top: 2rem;
   margin-top: 2rem;
-  border-top: 1px solid #e8e2d6;
+  border-top: 1px solid var(--background-white);
   font-size: 0.9rem;
-  color: #777;
+  color: var(--text-light);
 `;
 
 export const Footer = () => {

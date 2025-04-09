@@ -12,14 +12,14 @@ const Button = styled(motion.a)`
   cursor: pointer;
   transition: all 0.3s ease;
   
-  background-color: ${props => props.primary ? '#b78846' : 'transparent'};
-  color: ${props => props.primary ? 'white' : '#b78846'};
-  border: 2px solid ${props => props.primary ? '#b78846' : '#b78846'};
+  background-color: ${props => props.primary ? 'var(--primary-color)' : 'transparent'};
+  color: ${props => props.primary ? 'white' : 'var(--primary-color)'};
+  border: 2px solid var(--primary-color);
   
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(183, 136, 70, ${props => props.primary ? '0.4' : '0.2'});
-    background-color: ${props => props.primary ? '#c79856' : 'rgba(183, 136, 70, 0.1)'};
+    box-shadow: 0 5px 15px rgba(212, 175, 55, ${props => props.primary ? '0.4' : '0.2'});
+    background-color: ${props => props.primary ? 'var(--primary-light)' : 'rgba(212, 175, 55, 0.1)'};
   }
   
   &:active {

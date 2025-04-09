@@ -7,14 +7,14 @@
 
 /* Variables */
 :root {
-  --primary-color: #b78846;
-  --primary-light: #d4b078;
-  --primary-dark: #96703a;
-  --text-dark: #333;
-  --text-medium: #555;
-  --text-light: #777;
-  --background-light: #f8f5f0;
-  --background-white: #ffffff;
+  --primary-color: #D4AF37; /* Or brillant */
+  --primary-light: #E8CD6D; /* Or brillant plus clair */
+  --primary-dark: #B39227; /* Or brillant plus foncé */
+  --text-dark: #1A1A1A; /* Noir profond */
+  --text-medium: #333333; /* Gris anthracite */
+  --text-light: #666666; /* Gris moyen */
+  --background-light: #F5EFE0; /* Beige clair */
+  --background-white: #FDFBF7; /* Blanc cassé */
   --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.05);
   --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
   --transition-standard: all 0.3s ease;
@@ -27,7 +27,7 @@ body {
   line-height: 1.6;
   font-size: 16px;
   overflow-x: hidden;
-  background-color: var(--background-white);
+  background-color: var(--background-light);
 }
 
 /* Typography */

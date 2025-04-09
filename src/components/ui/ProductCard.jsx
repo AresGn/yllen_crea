@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -84,6 +85,7 @@ const CardLink = styled.a`
   font-size: 0.9rem;
   align-self: flex-start;
   position: relative;
+  cursor: pointer;
   
   &::after {
     content: '';
@@ -106,8 +108,33 @@ export const ProductCard = ({
   title, 
   description, 
   link = '#', 
-  featured = false
+  featured = false,
+  categoryId
 }) => {
+  const navigate = useNavigate();
+  
+  const handleClick = (e) => {
+    e.preventDefault();
+    
+    // Si nous avons un ID de catégorie, naviguer vers la page de catégorie
+    if (categoryId) {
+      navigate(`/category/${categoryId}`);
+    } else if (link.startsWith('#')) {
+      // Comportement par défaut pour les ancres
+      const targetElement = document.getElementById(link.substring(1));
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Si section n'existe pas encore
+        console.log(`Navigation to ${link} triggered but section not found.`);
+        alert(`Les produits ${title} seront bientôt disponibles!`);
+      }
+    } else {
+      // Pour liens externes
+      window.open(link, '_blank');
+    }
+  };
+  
   return (
     <Card featured={featured}>
       <ImageContainer>
@@ -122,7 +149,7 @@ export const ProductCard = ({
       <CardContent>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
-        <CardLink href={link}>Voir les produits</CardLink>
+        <CardLink href={link} onClick={handleClick}>Voir les produits</CardLink>
       </CardContent>
     </Card>
   );

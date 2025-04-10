@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { WhatsAppButton } from '../shared/WhatsAppButton';
 
 const FooterContainer = styled.footer`
@@ -115,7 +115,7 @@ export const Footer = () => {
     <FooterContainer>
       <FooterContent>
         <FooterSection>
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -134,11 +134,11 @@ export const Footer = () => {
                 <i className="fab fa-pinterest-p"></i>
               </a>
             </SocialIcons>
-          </motion.div>
+          </Motion.div>
         </FooterSection>
         
         <FooterSection>
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -146,18 +146,15 @@ export const Footer = () => {
           >
             <h3>Navigation</h3>
             <ul>
-              <li><a href="#home">Accueil</a></li>
               <li><a href="#creations">Mes Créations</a></li>
               <li><a href="#order-process">Comment Commander</a></li>
               <li><a href="#about">À Propos</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#calendar">Calendrier</a></li>
             </ul>
-          </motion.div>
+          </Motion.div>
         </FooterSection>
         
         <FooterSection>
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -168,7 +165,7 @@ export const Footer = () => {
             <div style={{ marginTop: '1rem' }}>
               <WhatsAppButton text="Discuter sur WhatsApp" fullWidth />
             </div>
-          </motion.div>
+          </Motion.div>
         </FooterSection>
       </FooterContent>
       

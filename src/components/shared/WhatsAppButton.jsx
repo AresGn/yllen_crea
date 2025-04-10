@@ -36,10 +36,17 @@ const StyledButton = styled(motion.a)`
   }
 `;
 
-export const WhatsAppButton = ({ text = "Contacter sur WhatsApp", fullWidth = false }) => {
+export const WhatsAppButton = ({ 
+  text = "Contacter sur WhatsApp", 
+  fullWidth = false, 
+  customMessage = "" 
+}) => {
   // Numéro WhatsApp avec code pays sans espace ni caractères spéciaux
   const whatsappNumber = "22963918285";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+  
+  // Construire l'URL WhatsApp avec le message personnalisé s'il existe
+  const message = encodeURIComponent(customMessage || "Bonjour, je suis intéressé(e) par vos créations en résine.");
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
   
   return (
     <StyledButton 

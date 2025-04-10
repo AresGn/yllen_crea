@@ -332,10 +332,10 @@ export const ProductModal = ({
   
   // Données fictives pour l'exemple - à remplacer par des données réelles
   const productImages = product?.images || [
-    `/assets/images/products/${category.id}/produit1.jpg`,
-    `/assets/images/products/${category.id}/produit2.jpg`,
-    `/assets/images/products/${category.id}/produit3.jpg`,
-    `/assets/images/products/${category.id}/produit4.jpg`,
+    `/assets/images/products/${category.id}/produit1.webp`,
+    `/assets/images/products/${category.id}/produit2.webp`,
+    `/assets/images/products/${category.id}/produit3.webp`,
+    `/assets/images/products/${category.id}/produit4.webp`,
   ];
   
   const colorOptions = product?.colors || [

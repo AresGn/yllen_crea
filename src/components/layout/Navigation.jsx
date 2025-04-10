@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
 const NavContainer = styled.nav`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 100%;
   
   @media (max-width: 768px) {
     .desktop-menu {
@@ -57,24 +60,30 @@ const MobileMenuToggle = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.6rem;
+  z-index: 1000;
+  margin-left: auto;
   
   @media (max-width: 768px) {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   
   .bar {
     display: block;
-    width: 25px;
+    width: 30px;
     height: 3px;
-    margin: 5px auto;
-    background-color: #333;
+    margin: 4px auto;
+    background-color: var(--text-dark, #333);
     transition: all 0.3s ease-in-out;
+    border-radius: 2px;
   }
   
   &.open {
     .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
+      transform: translateY(7px) rotate(45deg);
     }
     
     .bar:nth-child(2) {
@@ -82,7 +91,7 @@ const MobileMenuToggle = styled.button`
     }
     
     .bar:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
+      transform: translateY(-7px) rotate(-45deg);
     }
   }
 `;
@@ -104,7 +113,7 @@ const MobileMenu = styled(motion.div)`
   }
   
   li {
-    margin: 1rem 0;
+    margin: 1.2rem 0;
     text-align: center;
     
     a {
@@ -113,6 +122,8 @@ const MobileMenu = styled(motion.div)`
       font-weight: 500;
       font-size: 1.2rem;
       transition: color 0.3s ease;
+      display: block;
+      padding: 0.5rem 0;
       
       &:hover {
         color: var(--primary-color);
@@ -129,12 +140,9 @@ export const Navigation = () => {
   };
   
   const navItems = [
-    { name: 'Accueil', href: '#home' },
-    { name: 'Créations', href: '#creations' },
-    { name: 'Comment Commander', href: '#order-process' },
-    { name: 'À Propos', href: '#about' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Calendrier', href: '#calendar' }
+    { name: 'Créations', to: '/#creations' },
+    { name: 'Comment Commander', to: '/#order-process' },
+    { name: 'À Propos', to: '/#about' }
   ];
   
   return (
@@ -149,7 +157,7 @@ export const Navigation = () => {
               transition={{ delay: index * 0.1 }}
             >
               <NavItem>
-                <a href={item.href}>{item.name}</a>
+                <Link to={item.to}>{item.name}</Link>
               </NavItem>
             </motion.div>
           ))}
@@ -159,6 +167,7 @@ export const Navigation = () => {
       <MobileMenuToggle 
         className={mobileMenuOpen ? 'open' : ''} 
         onClick={toggleMobileMenu}
+        aria-label="Menu de navigation"
       >
         <span className="bar"></span>
         <span className="bar"></span>
@@ -181,12 +190,12 @@ export const Navigation = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <a 
-                    href={item.href}
+                  <Link
+                    to={item.to}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -7,17 +7,17 @@ export const AboutSection = () => {
   return (
     <section id="about" className="about-section">
       <div className="container">
-        <motion.h2 
+        <Motion.h2 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="section-title"
         >
           À Propos
-        </motion.h2>
+        </Motion.h2>
 
         <div className="about-content">
-          <motion.div 
+          <Motion.div 
             className="about-image"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -25,14 +25,14 @@ export const AboutSection = () => {
             transition={{ duration: 0.8 }}
           >
             <LazyLoadImage
-              src="/assets/images/products/autres/about-image.jpg"
+              src="/assets/images/products/autres/about-image.webp"
               alt="Fondatrice Yllen Créa"
               effect="blur"
               threshold={300}
             />
-          </motion.div>
+          </Motion.div>
 
-          <motion.div 
+          <Motion.div 
             className="about-text"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -58,7 +58,7 @@ export const AboutSection = () => {
               Nous croyons que les objets qui nous entourent devraient avoir une signification 
               personnelle, reflétant notre individualité et préservant nos souvenirs les plus précieux.
             </p>
-          </motion.div>
+          </Motion.div>
         </div>
       </div>
     </section>

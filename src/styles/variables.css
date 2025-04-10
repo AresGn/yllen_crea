@@ -1,1 +1,21 @@
-:root { --primary-color: #000000; --secondary-color: #ffffff; } 
+:root {
+  /* Couleurs principales */
+  --primary-color: #b78846;
+  --primary-light: #d4af37;
+  --primary-color-rgb: 183, 136, 70;
+  
+  /* Couleurs de texte */
+  --text-dark: #333333;
+  --text-medium: #666666;
+  --text-light: #999999;
+  
+  /* Couleurs de fond */
+  --bg-light: #f8f8f8;
+  --bg-off-white: #f4f4f4;
+  
+  /* Couleurs d'accent */
+  --accent-success: #2e7d32;
+  --accent-info: #0288d1;
+  --accent-warning: #ff8c00;
+  --accent-error: #d32f2f;
+} 

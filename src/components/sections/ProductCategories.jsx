@@ -86,7 +86,7 @@ const CategoriesGrid = styled.div`
   }
 `;
 
-const container = {
+const Container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -96,14 +96,14 @@ const container = {
   }
 };
 
-const item = {
+const Item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 }
 };
 
 export const ProductCategories = () => {
   const [filter, setFilter] = useState('all');
-  const { ref, inView } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref } = useIntersectionObserver({ threshold: 0.1 });
   
   const filteredCategories = filter === 'all' 
     ? categories 

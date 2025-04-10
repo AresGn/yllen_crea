@@ -23,7 +23,7 @@ export const Home = () => {
         <meta name="keywords" content="résine, bijoux, porte-clés, personnalisé, artisanat, accessoires, cadeaux personnalisés, créations" />
         <meta property="og:title" content="Yllen Créa | Créations en résine personnalisées" />
         <meta property="og:description" content="Des créations en résine personnalisées, uniques comme vous. Chez Yllen Créa, chaque pièce raconte une histoire — la vôtre." />
-        <meta property="og:image" content="/assets/images/og-image.jpg" />
+        <meta property="og:image" content="/assets/images/og-image.webp" />
         <meta property="og:url" content="https://yllencrea.com" />
         <meta property="og:type" content="website" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />

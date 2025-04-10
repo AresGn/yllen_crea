@@ -11,7 +11,7 @@ const BannerContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/images/products/autres/banniere_accceuille.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/images/products/autres/banniere_accceuille.webp');
   background-size: cover;
   background-position: center;
   color: white;

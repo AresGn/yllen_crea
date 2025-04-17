@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { WhatsAppButton } from '../shared/WhatsAppButton';
 
@@ -218,9 +218,6 @@ const OrderForm = ({ colorOptions, product, category, customizationComponent, se
   const [quantity, setQuantity] = useState(1);
   const [deliveryLocation, setDeliveryLocation] = useState('');
   
-  // Vérifier si tous les champs sont remplis
-  const formIsValid = color && personalization && quantity > 0 && deliveryLocation;
-  
   // Vérifier si on est dans la catégorie porte-cle-entreprise
   const isEnterpriseKeychain = category?.id === 'porte-cle-entreprise';
   
@@ -233,6 +230,40 @@ const OrderForm = ({ colorOptions, product, category, customizationComponent, se
       setQuantity(parseInt(selectedCustomizations.quantite) || 1);
     }
   }, [selectedCustomizations, hasQuantityInCustomization]);
+  
+  // Déterminer si le formulaire est valide en fonction des champs requis
+  const formIsValid = useMemo(() => {
+    // Si nous utilisons le composant de personnalisation
+    if (customizationComponent) {
+      // Vérifier si les options de personnalisation existent et contiennent des valeurs
+      const hasCustomizations = selectedCustomizations && 
+                        Object.keys(selectedCustomizations).length > 0;
+      
+      // Vérifier si chaque option a une valeur non vide
+      const customizationsValid = hasCustomizations && 
+                        Object.values(selectedCustomizations)
+                          .some(value => value && String(value).trim() !== '');
+      
+      // Vérifier si le lieu de livraison est rempli
+      const locationValid = deliveryLocation && deliveryLocation.trim() !== '';
+      
+      const isValid = customizationsValid && locationValid;
+      
+      console.log('Form validation:', {
+        hasCustomizations,
+        customizationsValid, 
+        locationValid,
+        deliveryLocation,
+        selectedCustomizations,
+        isValid
+      });
+      
+      return isValid;
+    } else {
+      // Sinon, vérifier les champs standards
+      return color && personalization && quantity > 0 && deliveryLocation && deliveryLocation.trim() !== '';
+    }
+  }, [color, personalization, quantity, deliveryLocation, selectedCustomizations, customizationComponent]);
   
   // Construire le message WhatsApp
   const buildWhatsAppMessage = () => {
@@ -329,19 +360,22 @@ const OrderForm = ({ colorOptions, product, category, customizationComponent, se
           <Input
             type="text"
             value={deliveryLocation}
-            onChange={(e) => setDeliveryLocation(e.target.value)}
+            onChange={(e) => {
+              const newValue = e.target.value;
+              setDeliveryLocation(newValue);
+              console.log("Location updated:", newValue);
+            }}
             placeholder="Quartier, ville"
             required
+            onBlur={() => {
+              console.log("Location field blurred, value:", deliveryLocation);
+            }}
           />
+          <HelpText>
+            Indiquez votre quartier et ville pour la livraison
+          </HelpText>
           
           <ActionButtons>
-            <OrderButton 
-              type="submit" 
-              disabled={!formIsValid}
-            >
-              Commander
-            </OrderButton>
-            
             {formIsValid && (
               <WhatsAppButton 
                 text="Commander sur WhatsApp" 

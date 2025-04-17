@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Header } from '../components/layout/Header';
@@ -407,16 +407,89 @@ const OptionTitle = styled.h4`
   }
 `;
 
+// Composant CustomizationOptions déplacé en dehors du composant principal
+const CustomizationOptions = ({ customizationOptions, colorOptions, formValues, handleCustomizationChange }) => {
+  // Fonction pour vérifier que les champs requis sont bien remplis
+  const handleInputChange = (optionId, value) => {
+    // Appliquer immédiatement le changement
+    handleCustomizationChange(optionId, value);
+  };
+
+  return (
+    <ProductOptions>
+      <OptionLabel>Options de personnalisation <span className="required">*</span></OptionLabel>
+      {customizationOptions.map(option => (
+        <CustomizationOption key={option.id}>
+          <OptionTitle>{option.label}</OptionTitle>
+          {option.id === 'quantite' ? (
+            <>
+              <Input 
+                type="number" 
+                placeholder="Quantité souhaitée"
+                value={formValues[option.id] || ''}
+                onChange={(e) => handleInputChange(option.id, e.target.value)}
+                min="100"
+                max="50000"
+                required
+              />
+              <HelpText>Entre 100 et 50000 pièces</HelpText>
+            </>
+          ) : option.id === 'couleur' ? (
+            <Select
+              value={formValues[option.id] || ''}
+              onChange={(e) => handleInputChange(option.id, e.target.value)}
+              required
+            >
+              <option value="">Sélectionnez une couleur</option>
+              {colorOptions.map(color => (
+                <option key={color.id} value={color.id}>{color.name}</option>
+              ))}
+            </Select>
+          ) : option.id === 'decoration' ? (
+            <Input 
+              type="text" 
+              placeholder="Décrivez la décoration souhaitée"
+              value={formValues[option.id] || ''}
+              onChange={(e) => handleInputChange(option.id, e.target.value)}
+              required
+            />
+          ) : (
+            <>
+              <Input 
+                type="text" 
+                placeholder={`Saisissez votre ${option.id === 'nom' ? 'nom' : option.id === 'message' ? 'message' : 'personnalisation'}`}
+                value={formValues[option.id] || ''}
+                onChange={(e) => handleInputChange(option.id, e.target.value)}
+                required
+              />
+              {option.id === 'photo' && (
+                <Input 
+                  type="file" 
+                  accept="image/*"
+                  onChange={(e) => handleInputChange('photo_file', e.target.files[0])}
+                />
+              )}
+            </>
+          )}
+        </CustomizationOption>
+      ))}
+    </ProductOptions>
+  );
+};
+
 export const CategoryPage = () => {
   const { categoryId } = useParams();
   const navigate = useNavigate();
   const [showOrderForm, setShowOrderForm] = useState(false);
-  const [selectedCustomizations, setSelectedCustomizations] = useState({});
+  // Fusionner les deux états en un seul
+  const [formValues, setFormValues] = useState({});
   
   // Faire défiler la page vers le haut lors du chargement
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log("CategoryPage chargée avec ID:", categoryId);
+    // Réinitialiser les valeurs du formulaire lors du changement de catégorie
+    setFormValues({});
   }, [categoryId]);
   
   // Trouver la catégorie correspondante
@@ -435,7 +508,7 @@ export const CategoryPage = () => {
   }, [category, navigate]);
   
   // Données de personnalisation pour chaque catégorie
-  const categoryCustomizations = {
+  const categoryCustomizations = useMemo(() => ({
     'porte-cle': [
       { id: 'nom', label: 'Personnalisation avec un nom' },
       { id: 'message', label: 'Personnalisation avec un message' },
@@ -479,13 +552,13 @@ export const CategoryPage = () => {
       { id: 'logo', label: 'Personnalisation avec un logo' },
       { id: 'nom', label: 'Personnalisation avec un nom' }
     ]
-  };
+  }), []);
   
   // Valeurs par défaut pour les autres catégories
-  const defaultCustomizations = [
+  const defaultCustomizations = useMemo(() => [
     { id: 'message', label: 'Personnalisation avec un message' },
     { id: 'nom', label: 'Personnalisation avec un nom' }
-  ];
+  ], []);
   
   // Obtenir les produits de cette catégorie
   const products = useMemo(() => {
@@ -509,28 +582,43 @@ export const CategoryPage = () => {
   }, [products]);
   
   // Obtenir les options de personnalisation pour cette catégorie
-  const customizationOptions = categoryCustomizations[categoryId] || defaultCustomizations;
+  const customizationOptions = useMemo(() => {
+    return categoryCustomizations[categoryId] || defaultCustomizations;
+  }, [categoryId, categoryCustomizations, defaultCustomizations]);
   
   // Utiliser toutes les images sans déduplication
   const uniqueSliderImages = sliderImages;
   
   // Couleurs disponibles (combinaison de toutes les couleurs des produits)
-  const colorOptions = products.reduce((acc, product) => {
-    if (product.colors && product.colors.length) {
-      const newColors = product.colors.filter(color => 
-        !acc.some(c => c.id === color.id)
-      );
-      return [...acc, ...newColors];
-    }
-    return acc;
-  }, []);
+  const colorOptions = useMemo(() => {
+    return products.reduce((acc, product) => {
+      if (product.colors && product.colors.length) {
+        const newColors = product.colors.filter(color => 
+          !acc.some(c => c.id === color.id)
+        );
+        return [...acc, ...newColors];
+      }
+      return acc;
+    }, []);
+  }, [products]);
   
-  const handleCustomizationChange = (optionId, value) => {
-    setSelectedCustomizations(prev => ({
+  const handleCustomizationChange = useCallback((optionId, value) => {
+    setFormValues(prev => ({
       ...prev,
       [optionId]: value
     }));
-  };
+    console.log(`Changement de personnalisation: ${optionId} = ${value}`);
+  }, []);
+  
+  // Utilisation du composant CustomizationOptions memoizé
+  const customizationComponent = useMemo(() => (
+    <CustomizationOptions 
+      customizationOptions={customizationOptions}
+      colorOptions={colorOptions}
+      formValues={formValues}
+      handleCustomizationChange={handleCustomizationChange}
+    />
+  ), [customizationOptions, colorOptions, formValues, handleCustomizationChange]);
   
   if (!category) {
     return null;
@@ -539,57 +627,6 @@ export const CategoryPage = () => {
   const handleOrderClick = () => {
     setShowOrderForm(true);
   };
-  
-  // Composant pour le rendu des options de personnalisation
-  const CustomizationOptions = () => (
-    <ProductOptions>
-      <OptionLabel>Options de personnalisation <span className="required">*</span></OptionLabel>
-      {customizationOptions.map(option => (
-        <CustomizationOption key={option.id}>
-          <OptionTitle>{option.label}</OptionTitle>
-          {option.id === 'quantite' ? (
-            <>
-              <Input 
-                type="number" 
-                placeholder="Quantité souhaitée"
-                onChange={(e) => handleCustomizationChange(option.id, e.target.value)}
-                min="100"
-                max="50000"
-                required
-              />
-              <HelpText>Entre 100 et 50000 pièces</HelpText>
-            </>
-          ) : option.id === 'couleur' ? (
-            <Select
-              onChange={(e) => handleCustomizationChange(option.id, e.target.value)}
-              required
-            >
-              <option value="">Sélectionnez une couleur</option>
-              {colorOptions.map(color => (
-                <option key={color.id} value={color.id}>{color.name}</option>
-              ))}
-            </Select>
-          ) : (
-            <>
-              <Input 
-                type="text" 
-                placeholder={`Saisissez votre ${option.id === 'nom' ? 'nom' : option.id === 'message' ? 'message' : 'personnalisation'}`}
-                onChange={(e) => handleCustomizationChange(option.id, e.target.value)}
-                required
-              />
-              {option.id === 'photo' && (
-                <Input 
-                  type="file" 
-                  accept="image/*"
-                  onChange={(e) => handleCustomizationChange('photo_file', e.target.files[0])}
-                />
-              )}
-            </>
-          )}
-        </CustomizationOption>
-      ))}
-    </ProductOptions>
-  );
   
   return (
     <Page>
@@ -617,8 +654,8 @@ export const CategoryPage = () => {
             colorOptions={colorOptions} 
             product={products[0]} 
             category={category}
-            customizationComponent={<CustomizationOptions />}
-            selectedCustomizations={selectedCustomizations}
+            customizationComponent={customizationComponent}
+            selectedCustomizations={formValues}
           />
         )}
       </Main>

@@ -191,24 +191,32 @@ const OrderButton = styled.button`
 `;
 
 const ProductDetails = ({ product, category, onOrderClick }) => {
+  // Récupérer la plage de prix correspondant à la catégorie
+  const getPriceRange = () => {
+    const categoryPrices = {
+      'porte-cle': '1500-3000',
+      'porte-cle-entreprise': '1500-3000',
+      'boucles': '1000-2500',
+      'collier': '1000-3000',
+      'bracelet': '1000',
+      'boite-bijoux': '4000',
+      'decapsuleur': '1500-3500',
+      'porte-verre': '3000-16000',
+      'porte-livre': '10000',
+      'marque-page': '1000-1500',
+      'pochette-portable': '1000-2500',
+    };
+    
+    return categoryPrices[category.id] || '';
+  };
+  
   return (
     <Details>
       <h2>{product?.name || `${category.name} Personnalisé`}</h2>
       
       <Price>
-        <span className="price">1 500 FCFA</span>
-        <span className="original">2 500 FCFA</span>
-        <span className="discount">-40%</span>
+        <span className="price">{getPriceRange()} FCFA</span>
       </Price>
-      
-      <PromoBadge>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#ff8c00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M2 17L12 22L22 17" stroke="#ff8c00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M2 12L12 17L22 12" stroke="#ff8c00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        Promotion spéciale! Commandez dans les prochaines 24h et bénéficiez de -40%
-      </PromoBadge>
       
       <Description>
         {product?.description || category.description}

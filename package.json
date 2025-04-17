@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "framer-motion": "^10.16.4",
+    "lucide-react": "^0.488.0",
     "react": "^18.2.0",
     "react-calendar": "^4.6.0",
     "react-dom": "^18.2.0",

@@ -119,6 +119,8 @@ export const ProductCard = ({
     // Si nous avons un ID de catégorie, naviguer vers la page de catégorie
     if (categoryId) {
       navigate(`/category/${categoryId}`);
+      // Faire défiler la page vers le haut
+      window.scrollTo(0, 0);
     } else if (link.startsWith('#')) {
       // Comportement par défaut pour les ancres
       const targetElement = document.getElementById(link.substring(1));

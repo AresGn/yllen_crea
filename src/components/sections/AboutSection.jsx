@@ -25,7 +25,7 @@ export const AboutSection = () => {
             transition={{ duration: 0.8 }}
           >
             <LazyLoadImage
-              src="/assets/images/products/autres/about-image.webp"
+              src="/assets/images/products/autres/about-image.jpeg"
               alt="Fondatrice Yllen Créa"
               effect="blur"
               threshold={300}

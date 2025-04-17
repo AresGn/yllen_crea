@@ -368,35 +368,151 @@ const ShippingInfo = styled.div`
   }
 `;
 
+const PriceRange = styled.div`
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0.5rem 0 1rem;
+  
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+    margin: 0.6rem 0 1.2rem;
+  }
+  
+  @media (min-width: 992px) {
+    font-size: 1.4rem;
+    margin: 0.7rem 0 1.4rem;
+  }
+`;
+
+const CustomizationOption = styled.div`
+  margin-bottom: 1rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const OptionTitle = styled.h4`
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  
+  @media (min-width: 768px) {
+    font-size: 1.05rem;
+  }
+  
+  @media (min-width: 992px) {
+    font-size: 1.1rem;
+  }
+`;
+
 export const CategoryPage = () => {
   const { categoryId } = useParams();
   const navigate = useNavigate();
   const [showOrderForm, setShowOrderForm] = useState(false);
+  const [selectedCustomizations, setSelectedCustomizations] = useState({});
+  
+  // Faire défiler la page vers le haut lors du chargement
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    console.log("CategoryPage chargée avec ID:", categoryId);
+  }, [categoryId]);
   
   // Trouver la catégorie correspondante
-  const category = categories.find(cat => cat.id === categoryId);
+  const category = useMemo(() => {
+    const cat = categories.find(cat => cat.id === categoryId);
+    console.log("Catégorie trouvée:", cat);
+    return cat;
+  }, [categoryId]);
+  
+  // Si la catégorie n'existe pas, rediriger vers la page d'accueil
+  useEffect(() => {
+    if (!category) {
+      console.log("Catégorie non trouvée, redirection vers l'accueil");
+      navigate('/');
+    }
+  }, [category, navigate]);
+  
+  // Données de personnalisation pour chaque catégorie
+  const categoryCustomizations = {
+    'porte-cle': [
+      { id: 'nom', label: 'Personnalisation avec un nom' },
+      { id: 'message', label: 'Personnalisation avec un message' },
+      { id: 'resine', label: 'Personnalisation avec des décorations en résine comme complément' }
+    ],
+    'porte-cle-entreprise': [
+      { id: 'logo', label: 'Personnalisation avec un logo d\'entreprise' },
+      { id: 'quantite', label: 'Quantité (100 à 50000)' }
+    ],
+    'boucles': [
+      { id: 'couleur', label: 'Choix de couleur' },
+      { id: 'decoration', label: 'Choix de décoration' }
+    ],
+    'collier': [
+      { id: 'nom', label: 'Personnalisation avec un nom' },
+      { id: 'message', label: 'Personnalisation avec un message' }
+    ],
+    'bracelet': [
+      { id: 'couleur', label: 'Choix de couleur' }
+    ],
+    'porte-verre': [
+      { id: 'message', label: 'Personnalisation avec un message' },
+      { id: 'logo', label: 'Personnalisation avec un logo' },
+      { id: 'nom', label: 'Personnalisation avec un nom' },
+      { id: 'photo', label: 'Personnalisation avec une photo' }
+    ],
+    'marque-page': [
+      { id: 'message', label: 'Personnalisation avec un message' },
+      { id: 'logo', label: 'Personnalisation avec un logo' },
+      { id: 'nom', label: 'Personnalisation avec un nom' },
+      { id: 'photo', label: 'Personnalisation avec une photo' }
+    ],
+    'pochette-portable': [
+      { id: 'message', label: 'Personnalisation avec un message' },
+      { id: 'logo', label: 'Personnalisation avec un logo' },
+      { id: 'nom', label: 'Personnalisation avec un nom' },
+      { id: 'photo', label: 'Personnalisation avec une photo' }
+    ],
+    'decapsuleur': [
+      { id: 'message', label: 'Personnalisation avec un message' },
+      { id: 'logo', label: 'Personnalisation avec un logo' },
+      { id: 'nom', label: 'Personnalisation avec un nom' }
+    ]
+  };
+  
+  // Valeurs par défaut pour les autres catégories
+  const defaultCustomizations = [
+    { id: 'message', label: 'Personnalisation avec un message' },
+    { id: 'nom', label: 'Personnalisation avec un nom' }
+  ];
   
   // Obtenir les produits de cette catégorie
-  const products = useMemo(() => categoryProducts[categoryId] || [], [categoryId]);
+  const products = useMemo(() => {
+    // Vérifier si les produits existent pour cette catégorie
+    const categoryProds = categoryProducts[categoryId] || [];
+    console.log("Produits trouvés pour la catégorie", categoryId, ":", categoryProds);
+    return categoryProds;
+  }, [categoryId]);
   
   // Images pour le slider (toutes les images des produits)
-  const sliderImages = useMemo(() => products.reduce((acc, product) => {
-    if (product.images && product.images.length) {
-      return [...acc, ...product.images];
-    }
-    return acc;
-  }, []), [products]);
+  const sliderImages = useMemo(() => {
+    const images = products.reduce((acc, product) => {
+      if (product?.images && product.images.length) {
+        console.log("Images trouvées pour le produit", product.id, ":", product.images);
+        return [...acc, ...product.images];
+      }
+      return acc;
+    }, []);
+    console.log("Images pour le slider:", images);
+    return images;
+  }, [products]);
+  
+  // Obtenir les options de personnalisation pour cette catégorie
+  const customizationOptions = categoryCustomizations[categoryId] || defaultCustomizations;
   
   // Utiliser toutes les images sans déduplication
   const uniqueSliderImages = sliderImages;
-  
-  // Debug: Afficher les informations sur les images dans la console
-  useEffect(() => {
-    console.log("Catégorie:", categoryId);
-    console.log("Produits trouvés:", products);
-    console.log("Images pour le slider:", uniqueSliderImages);
-    console.log("Nombre d'images:", uniqueSliderImages.length);
-  }, [categoryId, products, uniqueSliderImages]);
   
   // Couleurs disponibles (combinaison de toutes les couleurs des produits)
   const colorOptions = products.reduce((acc, product) => {
@@ -409,12 +525,12 @@ export const CategoryPage = () => {
     return acc;
   }, []);
   
-  // Si la catégorie n'existe pas, rediriger vers la page d'accueil
-  useEffect(() => {
-    if (!category) {
-      navigate('/');
-    }
-  }, [category, navigate]);
+  const handleCustomizationChange = (optionId, value) => {
+    setSelectedCustomizations(prev => ({
+      ...prev,
+      [optionId]: value
+    }));
+  };
   
   if (!category) {
     return null;
@@ -424,17 +540,72 @@ export const CategoryPage = () => {
     setShowOrderForm(true);
   };
   
+  // Composant pour le rendu des options de personnalisation
+  const CustomizationOptions = () => (
+    <ProductOptions>
+      <OptionLabel>Options de personnalisation <span className="required">*</span></OptionLabel>
+      {customizationOptions.map(option => (
+        <CustomizationOption key={option.id}>
+          <OptionTitle>{option.label}</OptionTitle>
+          {option.id === 'quantite' ? (
+            <>
+              <Input 
+                type="number" 
+                placeholder="Quantité souhaitée"
+                onChange={(e) => handleCustomizationChange(option.id, e.target.value)}
+                min="100"
+                max="50000"
+                required
+              />
+              <HelpText>Entre 100 et 50000 pièces</HelpText>
+            </>
+          ) : option.id === 'couleur' ? (
+            <Select
+              onChange={(e) => handleCustomizationChange(option.id, e.target.value)}
+              required
+            >
+              <option value="">Sélectionnez une couleur</option>
+              {colorOptions.map(color => (
+                <option key={color.id} value={color.id}>{color.name}</option>
+              ))}
+            </Select>
+          ) : (
+            <>
+              <Input 
+                type="text" 
+                placeholder={`Saisissez votre ${option.id === 'nom' ? 'nom' : option.id === 'message' ? 'message' : 'personnalisation'}`}
+                onChange={(e) => handleCustomizationChange(option.id, e.target.value)}
+                required
+              />
+              {option.id === 'photo' && (
+                <Input 
+                  type="file" 
+                  accept="image/*"
+                  onChange={(e) => handleCustomizationChange('photo_file', e.target.files[0])}
+                />
+              )}
+            </>
+          )}
+        </CustomizationOption>
+      ))}
+    </ProductOptions>
+  );
+  
   return (
     <Page>
       <Header />
       <Main>
         <ProductLayout
           gallery={<ProductSlider images={uniqueSliderImages} altPrefix={category.name} />}
-          details={<ProductDetails 
-                      product={products[0]} 
-                      category={category} 
-                      onOrderClick={handleOrderClick}
-                    />}
+          details={
+            <>
+              <ProductDetails 
+                product={products[0]} 
+                category={category} 
+                onOrderClick={handleOrderClick}
+              />
+            </>
+          }
         >
           <Breadcrumbs categoryName={category.name} />
           <CategoryHeader title={category.name} description={category.description} />
@@ -445,7 +616,9 @@ export const CategoryPage = () => {
           <OrderForm 
             colorOptions={colorOptions} 
             product={products[0]} 
-            category={category} 
+            category={category}
+            customizationComponent={<CustomizationOptions />}
+            selectedCustomizations={selectedCustomizations}
           />
         )}
       </Main>

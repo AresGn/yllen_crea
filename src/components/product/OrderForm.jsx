@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { WhatsAppButton } from '../shared/WhatsAppButton';
 
@@ -171,7 +171,48 @@ const ActionButtons = styled.div`
   }
 `;
 
-const OrderForm = ({ colorOptions, product, category }) => {
+const OrderButton = styled.button`
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(var(--primary-color-rgb), 0.3);
+  margin-bottom: 1rem;
+  
+  @media (min-width: 768px) {
+    padding: 13px 22px;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 9px rgba(var(--primary-color-rgb), 0.3);
+  }
+  
+  @media (min-width: 992px) {
+    padding: 14px 25px;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(var(--primary-color-rgb), 0.3);
+  }
+  
+  &:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(var(--primary-color-rgb), 0.4);
+  }
+  
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+`;
+
+const OrderForm = ({ colorOptions, product, category, customizationComponent, selectedCustomizations }) => {
   const [color, setColor] = useState('');
   const [personalization, setPersonalization] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -180,86 +221,137 @@ const OrderForm = ({ colorOptions, product, category }) => {
   // Vérifier si tous les champs sont remplis
   const formIsValid = color && personalization && quantity > 0 && deliveryLocation;
   
+  // Vérifier si on est dans la catégorie porte-cle-entreprise
+  const isEnterpriseKeychain = category?.id === 'porte-cle-entreprise';
+  
+  // Si l'utilisateur a déjà spécifié une quantité dans les options de personnalisation
+  const hasQuantityInCustomization = selectedCustomizations && 'quantite' in selectedCustomizations;
+  
+  // Utiliser la quantité des personnalisations si elle existe
+  useEffect(() => {
+    if (hasQuantityInCustomization && selectedCustomizations.quantite) {
+      setQuantity(parseInt(selectedCustomizations.quantite) || 1);
+    }
+  }, [selectedCustomizations, hasQuantityInCustomization]);
+  
   // Construire le message WhatsApp
   const buildWhatsAppMessage = () => {
     const productName = product?.name || `${category.name} Personnalisé`;
     const colorName = colorOptions.find(c => c.id === color)?.name || color;
     
+    // Ajouter les personnalisations sélectionnées au message si elles existent
+    let customizationsText = '';
+    if (selectedCustomizations && Object.keys(selectedCustomizations).length > 0) {
+      customizationsText = '\n*Personnalisations:*\n';
+      for (const [key, value] of Object.entries(selectedCustomizations)) {
+        // Ne pas ajouter la quantité en double
+        if (key !== 'quantite' || !isEnterpriseKeychain) {
+          customizationsText += `- ${key}: ${value}\n`;
+        }
+      }
+    }
+    
     return `Bonjour, je souhaite commander:\n\n` +
       `*Produit:* ${productName}\n` +
       `*Couleur:* ${colorName}\n` +
-      `*Personnalisation:* ${personalization}\n` +
+      `*Personnalisation:* ${personalization}` +
+      customizationsText +
       `*Quantité:* ${quantity}\n` +
       `*Lieu de livraison:* ${deliveryLocation}\n\n` +
       `Merci!`;
   };
   
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Ici, vous pouvez ajouter le traitement du formulaire
+    console.log("Commande soumise");
+  };
+  
   return (
     <OrderFormContainer>
       <FormTitle>Personnalisez votre commande</FormTitle>
-      <ProductOptions>
-        <OptionLabel>
-          Couleur <span className="required">*</span>
-        </OptionLabel>
-        <Select 
-          value={color} 
-          onChange={(e) => setColor(e.target.value)}
-          required
-        >
-          <option value="">Sélectionner une option</option>
-          {colorOptions.map(option => (
-            <option key={option.id} value={option.id}>
-              {option.name}
-            </option>
-          ))}
-        </Select>
-        
-        <OptionLabel>
-          Personnalisation <span className="required">*</span>
-        </OptionLabel>
-        <Input
-          type="text"
-          value={personalization}
-          onChange={(e) => setPersonalization(e.target.value)}
-          placeholder="Ex: Jasper (un seul mot)"
-          required
-        />
-        <HelpText>
-          Veuillez indiquer le texte, prénom ou date à inclure sur le produit.
-        </HelpText>
-        
-        <OptionLabel>
-          Quantité <span className="required">*</span>
-        </OptionLabel>
-        <Input
-          type="number"
-          min="1"
-          value={quantity}
-          onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-          required
-        />
-        
-        <OptionLabel>
-          Lieu de livraison <span className="required">*</span>
-        </OptionLabel>
-        <Input
-          type="text"
-          value={deliveryLocation}
-          onChange={(e) => setDeliveryLocation(e.target.value)}
-          placeholder="Quartier, ville"
-          required
-        />
-        
-        {formIsValid && (
+      <form onSubmit={handleSubmit}>
+        <ProductOptions>
+          {/* Utiliser le composant de personnalisation s'il est fourni */}
+          {customizationComponent || (
+            <>
+              <OptionLabel>
+                Couleur <span className="required">*</span>
+              </OptionLabel>
+              <Select 
+                value={color} 
+                onChange={(e) => setColor(e.target.value)}
+                required
+              >
+                <option value="">Sélectionner une option</option>
+                {colorOptions.map(option => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+              </Select>
+              
+              <OptionLabel>
+                Personnalisation <span className="required">*</span>
+              </OptionLabel>
+              <Input
+                type="text"
+                value={personalization}
+                onChange={(e) => setPersonalization(e.target.value)}
+                placeholder="Ex: Jasper (un seul mot)"
+                required
+              />
+              <HelpText>
+                Veuillez indiquer le texte, prénom ou date à inclure sur le produit.
+              </HelpText>
+            </>
+          )}
+          
+          {/* N'afficher le champ de quantité que si ce n'est pas déjà spécifié dans les options de personnalisation */}
+          {!isEnterpriseKeychain && (
+            <>
+              <OptionLabel>
+                Quantité <span className="required">*</span>
+              </OptionLabel>
+              <Input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                required
+              />
+            </>
+          )}
+          
+          <OptionLabel>
+            Lieu de livraison <span className="required">*</span>
+          </OptionLabel>
+          <Input
+            type="text"
+            value={deliveryLocation}
+            onChange={(e) => setDeliveryLocation(e.target.value)}
+            placeholder="Quartier, ville"
+            required
+          />
+          
           <ActionButtons>
-            <WhatsAppButton 
-              text="Commander sur WhatsApp" 
-              fullWidth 
-              customMessage={buildWhatsAppMessage()}
-            />
+            <OrderButton 
+              type="submit" 
+              disabled={!formIsValid}
+            >
+              Commander
+            </OrderButton>
+            
+            {formIsValid && (
+              <WhatsAppButton 
+                text="Commander sur WhatsApp" 
+                fullWidth 
+                customMessage={buildWhatsAppMessage()}
+              />
+            )}
           </ActionButtons>
-        )}
-      </ProductOptions>
+        </ProductOptions>
+      </form>
     </OrderFormContainer>
   );
 };

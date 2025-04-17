@@ -127,7 +127,7 @@ export const Footer = () => {
               <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://web.facebook.com/profile.php?id=61565851836325" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i className="fab fa-facebook-f"></i>
               </a>
               <a href="https://pinterest.com/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">

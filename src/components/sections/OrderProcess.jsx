@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { CTAButton } from '../shared/CTAButton';
 import { WhatsAppButton } from '../shared/WhatsAppButton';
+import { ShoppingBag, Palette, CreditCard, Hammer, Truck } from 'lucide-react';
 
 const Section = styled.section`
   padding: 5rem 2rem;
@@ -41,83 +42,113 @@ const SectionHeader = styled.div`
   }
 `;
 
-const ProcessSteps = styled.div`
+const TimelineContainer = styled.div`
   max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Step = styled(motion.div)`
-  background-color: white;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   position: relative;
-  overflow: hidden;
+`;
+
+const TimelineLine = styled.div`
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(to bottom, #3B82F6, #FBBF24, #A855F7);
   
-  &::before {
-    content: '${props => props.number}';
-    position: absolute;
-    top: -30px;
-    right: -15px;
-    font-size: 8rem;
-    font-weight: 800;
-    color: rgba(183, 136, 70, 0.1);
-    z-index: 0;
+  @media (min-width: 768px) {
+    display: block;
   }
 `;
 
-const StepIcon = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: rgba(183, 136, 70, 0.1);
+const StepsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+`;
+
+const StepWrapper = styled(motion.div)`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  @media (min-width: 768px) {
+    flex-direction: ${props => props.isEven ? 'row' : 'row-reverse'};
+  }
+`;
+
+const StepIconContainer = styled(motion.div)`
+  z-index: 10;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
-  position: relative;
-  z-index: 1;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: ${props => props.color || '#3B82F6'};
+  color: white;
+  transition: transform 0.3s ease;
   
-  i {
-    font-size: 1.5rem;
-    color: #b78846;
+  ${props => props.isActive && `
+    transform: scale(1.1);
+  `}
+`;
+
+const StepContent = styled(motion.div)`
+  width: 100%;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  transition: transform 0.3s ease;
+  
+  @media (min-width: 768px) {
+    width: 41.666%;
+    margin-top: 0;
+    ${props => props.isActive && `
+      transform: translateY(-8px);
+    `}
   }
 `;
 
+const StepNumberBadge = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: ${props => props.color || '#3B82F6'};
+  color: white;
+  font-weight: bold;
+  margin-right: 0.75rem;
+`;
+
+const StepHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+`;
+
 const StepTitle = styled.h3`
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #333;
-  position: relative;
-  z-index: 1;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1F2937;
 `;
 
 const StepDescription = styled.p`
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #666;
-  margin-bottom: 0;
-  position: relative;
-  z-index: 1;
+  color: #4B5563;
 `;
 
 const CallToAction = styled.div`
   text-align: center;
   margin-top: 4rem;
-  
-  p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    color: #666;
-  }
   
   .buttons {
     display: flex;
@@ -131,42 +162,48 @@ const CallToAction = styled.div`
   }
 `;
 
-const orderSteps = [
-  {
-    number: '1',
-    title: 'Choix de l\'article',
-    description: 'Parcourez les créations et choisissez celle qui vous plaît ou demandez une personnalisation spécifique.',
-    icon: 'fas fa-shopping-bag'
-  },
-  {
-    number: '2',
-    title: 'Personnalisation',
-    description: 'Choisissez les couleurs, les inclusions et l\'inscription que vous souhaitez pour votre création.',
-    icon: 'fas fa-palette'
-  },
-  {
-    number: '3',
-    title: 'Commande & Paiement',
-    description: 'Confirmez votre commande et effectuez le paiement pour lancer la création de votre pièce unique.',
-    icon: 'fas fa-credit-card'
-  },
-  {
-    number: '4',
-    title: 'Création artisanale',
-    description: 'Votre pièce est fabriquée à la main avec soin sous 72h à 2 semaines selon la complexité.',
-    icon: 'fas fa-paint-brush'
-  },
-  {
-    number: '5',
-    title: 'Livraison',
-    description: 'Votre création est emballée avec soin et expédiée directement chez vous (frais à votre charge).',
-    icon: 'fas fa-shipping-fast'
-  }
-];
-
 export const OrderProcess = () => {
   const { ref, inView } = useIntersectionObserver({ threshold: 0.1 });
+  const [activeStep, setActiveStep] = useState(0);
   
+  const steps = [
+    {
+      number: 1,
+      title: "Choix de l'article",
+      description: "Parcourez les créations et choisissez celle qui vous plaît ou demandez une personnalisation spécifique.",
+      icon: <ShoppingBag size={24} />,
+      color: "#3B82F6" // blue-500
+    },
+    {
+      number: 2,
+      title: "Personnalisation",
+      description: "Choisissez les couleurs, les inclusions et l'inscription que vous souhaitez pour votre création.",
+      icon: <Palette size={24} />,
+      color: "#14B8A6" // teal-500
+    },
+    {
+      number: 3,
+      title: "Commande & Paiement",
+      description: "Confirmez votre commande et effectuez le paiement pour lancer la création de votre pièce unique.",
+      icon: <CreditCard size={24} />,
+      color: "#F59E0B" // amber-500
+    },
+    {
+      number: 4,
+      title: "Création artisanale",
+      description: "Votre pièce est fabriquée à la main avec soin sous 72h à 2 semaines selon la complexité.",
+      icon: <Hammer size={24} />,
+      color: "#F43F5E" // rose-500
+    },
+    {
+      number: 5,
+      title: "Livraison",
+      description: "Votre création est emballée avec soin et expédiée directement chez vous (frais à votre charge).",
+      icon: <Truck size={24} />,
+      color: "#A855F7" // purple-500
+    }
+  ];
+
   return (
     <Section id="order-process" ref={ref}>
       <SectionHeader>
@@ -182,39 +219,45 @@ export const OrderProcess = () => {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Obtenir votre création personnalisée en résine est simple et rapide. 
+          Obtenir votre création personnalisée en résine est simple et rapide.
           Suivez ces quelques étapes pour recevoir votre pièce unique.
         </motion.p>
       </SectionHeader>
       
-      <ProcessSteps>
-        {orderSteps.map((step, index) => (
-          <Step 
-            key={index}
-            number={step.number}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 + (index * 0.1) }}
-          >
-            <StepIcon>
-              <i className={step.icon}></i>
-            </StepIcon>
-            <StepTitle>{step.title}</StepTitle>
-            <StepDescription>{step.description}</StepDescription>
-          </Step>
-        ))}
-      </ProcessSteps>
+      <TimelineContainer>
+        <TimelineLine />
+        <StepsContainer>
+          {steps.map((step, index) => (
+            <StepWrapper 
+              key={index}
+              isEven={index % 2 === 0}
+              onMouseEnter={() => setActiveStep(index)}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 + (index * 0.1) }}
+            >
+              <StepIconContainer 
+                color={step.color}
+                isActive={activeStep === index}
+              >
+                {step.icon}
+              </StepIconContainer>
+              
+              <StepContent isActive={activeStep === index}>
+                <StepHeader>
+                  <StepNumberBadge color={step.color}>
+                    {step.number}
+                  </StepNumberBadge>
+                  <StepTitle>{step.title}</StepTitle>
+                </StepHeader>
+                <StepDescription>{step.description}</StepDescription>
+              </StepContent>
+            </StepWrapper>
+          ))}
+        </StepsContainer>
+      </TimelineContainer>
       
       <CallToAction>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          Prêt à commander votre création personnalisée ? 
-          Contactez-moi directement ou explorez les collections.
-        </motion.p>
-        
         <motion.div 
           className="buttons"
           initial={{ opacity: 0, y: 20 }}

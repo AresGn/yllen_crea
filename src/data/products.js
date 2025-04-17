@@ -3,73 +3,92 @@ export const products = [];
 // Données des catégories de produits
 export const categories = [
   {
-    id: 'keychains',
+    id: 'porte-cle',
     name: 'Porte-clés Personnalisés',
     description: 'Des porte-clés uniques pour garder vos souvenirs près de vous à tout moment.',
-    image: '/assets/images/products/accessoires/porte_clé.webp',
+    image: '/assets/images/products/accessoires/porte_clé1.webp',
     featured: true
   },
   {
-    id: 'jewelry',
-    name: 'Bijoux en Résine',
-    description: 'Boucles d\'oreilles, colliers et bracelets avec inclusions personnalisées.',
-    image: '/assets/images/products/bijoux/Bracelet.webp',
+    id: 'boucles',
+    name: 'Boucles d\'Oreilles',
+    description: 'Boucles d\'oreilles avec choix de couleur et décoration.',
+    image: '/assets/images/products/bijoux/boucle.webp',
     featured: true
   },
   {
-    id: 'jewelryboxes',
+    id: 'collier',
+    name: 'Colliers Personnalisés',
+    description: 'Colliers personnalisés avec un nom ou un message.',
+    image: '/assets/images/products/bijoux/colier2.webp',
+    featured: true
+  },
+  {
+    id: 'bracelet',
+    name: 'Bracelets',
+    description: 'Bracelets personnalisés en résine.',
+    image: '/assets/images/products/bijoux/Bracelet4.webp',
+    featured: false
+  },
+  {
+    id: 'boite-bijoux',
     name: 'Boîtes à Bijoux',
     description: 'Des écrins uniques pour protéger vos bijoux les plus précieux.',
     image: '/assets/images/products/rangement/Boite_bijoux.webp',
     featured: false
   },
   {
-    id: 'bottle-openers',
+    id: 'decapsuleur',
     name: 'Décapsuleurs',
     description: 'Décapsuleurs ornés de motifs personnalisés, pratiques et décoratifs.',
     image: '/assets/images/products/accessoires/Décapsuleur.webp',
     featured: false
   },
   {
-    id: 'coasters',
+    id: 'porte-verre',
     name: 'Porte-verres',
-    description: 'Protégez vos meubles avec style grâce à nos dessous de verre en résine.',
+    description: 'Protégez vos meubles avec style grâce à nos porte-verres en résine.',
     image: '/assets/images/products/decoration/Porte_verre.webp',
     featured: true
   },
   {
-    id: 'bookends',
-    name: 'Serre-livres',
-    description: 'Donnez du caractère à votre bibliothèque avec nos serre-livres personnalisés.',
+    id: 'porte-livre',
+    name: 'Porte-livres',
+    description: 'Donnez du caractère à votre bibliothèque avec nos porte-livres personnalisés.',
     image: '/assets/images/products/decoration/pose_livre.webp',
     featured: false
   },
   {
-    id: 'bookmarks',
+    id: 'marque-page',
     name: 'Marque-pages',
     description: 'Des marque-pages élégants pour ne jamais perdre le fil de votre lecture.',
     image: '/assets/images/products/decoration/marque_page.webp',
     featured: false
   },
   {
-    id: 'phonecase',
-    name: 'Coques de Téléphone',
-    description: 'Protégez votre téléphone avec une coque unique et personnalisée.',
+    id: 'pochette-portable',
+    name: 'Pochettes de Portable',
+    description: 'Protégez votre téléphone avec un revêtement de pochette unique et personnalisé.',
     image: '/assets/images/products/rangement/pochette_phone.webp',
     featured: true
+  },
+  {
+    id: 'porte-cle-entreprise',
+    name: 'Porte-clés Entreprise',
+    description: 'Porte-clés personnalisés en gros pour vos événements et entreprises.',
+    image: '/assets/images/products/accessoires/porte_clé4.webp',
+    featured: false
   }
 ];
 
 // Produits spécifiques pour chaque catégorie
 export const categoryProducts = {
-  'keychains': [
+  'porte-cle': [
     {
       id: 'keychain-rectangle',
       name: 'Porte-clés Rectangle Personnalisé',
       description: 'Porte-clés en résine rectangulaire avec votre prénom ou texte personnalisé.',
-      price: 1500,
-      originalPrice: 2500,
-      discount: 40,
+      price: '1500-3000',
       images: [
         '/assets/images/products/accessoires/porte_clé.webp',
         '/assets/images/products/accessoires/porte_clé1.webp', 
@@ -82,14 +101,14 @@ export const categoryProducts = {
         { id: 'purple', name: 'Violet' },
         { id: 'transparent', name: 'Transparent' }
       ]
-    },
+    }
+  ],
+  'porte-cle-entreprise': [
     {
-      id: 'keychain-round',
-      name: 'Porte-clés Rond Personnalisé',
-      description: 'Porte-clés en résine rond avec inclusion de fleurs, paillettes ou photos.',
-      price: 1800,
-      originalPrice: 2800,
-      discount: 35,
+      id: 'keychain-corporate',
+      name: 'Porte-clés en Gros pour Entreprise',
+      description: 'Porte-clés en résine personnalisés pour vos événements d\'entreprise.',
+      price: '1500-3000',
       images: [
         '/assets/images/products/accessoires/porte_clé3.webp',
         '/assets/images/products/accessoires/porte_clé4.webp',
@@ -103,38 +122,16 @@ export const categoryProducts = {
       ]
     }
   ],
-  'jewelry': [
-    {
-      id: 'bracelet-custom',
-      name: 'Bracelet Personnalisé',
-      description: 'Bracelet en résine avec inclusions personnalisées selon vos goûts.',
-      price: 2500,
-      originalPrice: 3500,
-      discount: 28,
-      images: [
-        '/assets/images/products/bijoux/Bracelet.webp',
-        '/assets/images/products/bijoux/Bracelet1.webp',
-        '/assets/images/products/bijoux/Bracelet2.webp'
-      ],
-      colors: [
-        { id: 'blue', name: 'Bleu' },
-        { id: 'pink', name: 'Rose' },
-        { id: 'purple', name: 'Violet' },
-        { id: 'gold', name: 'Doré' },
-        { id: 'silver', name: 'Argenté' }
-      ]
-    },
+  'boucles': [
     {
       id: 'earrings-personalized',
       name: 'Boucles d\'Oreilles Personnalisées',
       description: 'Boucles d\'oreilles en résine époxy avec votre design unique.',
-      price: 2000,
-      originalPrice: 3200,
-      discount: 37,
+      price: '1000-2500',
       images: [
         '/assets/images/products/bijoux/boucle.webp',
         '/assets/images/products/bijoux/boucle1.webp',
-        '/assets/images/products/bijoux/boucle2.webp',
+        '/assets/images/products/bijoux/boucle2.webp'
       ],
       colors: [
         { id: 'blue', name: 'Bleu' },
@@ -145,14 +142,53 @@ export const categoryProducts = {
       ]
     }
   ],
-  'jewelryboxes': [
+  'collier': [
+    {
+      id: 'necklace-custom',
+      name: 'Collier Personnalisé',
+      description: 'Collier en résine personnalisé avec votre nom ou message.',
+      price: '1000-3000',
+      images: [
+        '/assets/images/products/bijoux/colier2.webp',
+        '/assets/images/products/bijoux/colier3.webp',
+        '/assets/images/products/bijoux/colier4.webp'
+      ],
+      colors: [
+        { id: 'blue', name: 'Bleu' },
+        { id: 'pink', name: 'Rose' },
+        { id: 'purple', name: 'Violet' },
+        { id: 'gold', name: 'Doré' },
+        { id: 'silver', name: 'Argenté' }
+      ]
+    }
+  ],
+  'bracelet': [
+    {
+      id: 'bracelet-custom',
+      name: 'Bracelet Personnalisé',
+      description: 'Bracelet en résine avec inclusions personnalisées selon vos goûts.',
+      price: '1000',
+      images: [
+        '/assets/images/products/bijoux/Bracelet4.webp',
+        '/assets/images/products/bijoux/Bracelet.webp',
+        '/assets/images/products/bijoux/Bracelet2.webp',
+        '/assets/images/products/bijoux/Bracelet3.webp'
+      ],
+      colors: [
+        { id: 'blue', name: 'Bleu' },
+        { id: 'pink', name: 'Rose' },
+        { id: 'purple', name: 'Violet' },
+        { id: 'gold', name: 'Doré' },
+        { id: 'silver', name: 'Argenté' }
+      ]
+    }
+  ],
+  'boite-bijoux': [
     {
       id: 'jewelry-box-small',
-      name: 'Petite Boîte à Bijoux',
+      name: 'Boîte à Bijoux Personnalisée',
       description: 'Boîte à bijoux en résine pour ranger vos petits trésors.',
-      price: 3500,
-      originalPrice: 5000,
-      discount: 30,
+      price: '4000',
       images: [
         '/assets/images/products/rangement/Boite_bijoux.webp',
         '/assets/images/products/rangement/Boite_bijoux2.webp',
@@ -167,18 +203,16 @@ export const categoryProducts = {
       ]
     }
   ],
-  'coasters': [
+  'porte-verre': [
     {
       id: 'coaster-round',
-      name: 'Dessous de Verre Rond',
-      description: 'Dessous de verre en résine pour protéger vos meubles avec élégance.',
-      price: 1200,
-      originalPrice: 2000,
-      discount: 40,
+      name: 'Porte Verre Personnalisé',
+      description: 'Porte verre en résine pour protéger vos meubles avec élégance.',
+      price: '3000-16000',
       images: [
         '/assets/images/products/decoration/Porte_verre.webp',
         '/assets/images/products/decoration/Porte_verre2.webp',
-        '/assets/images/products/decoration/marque_page.webp'
+        '/assets/images/products/decoration/Porte_verre.webp'
       ],
       colors: [
         { id: 'blue', name: 'Bleu' },
@@ -189,14 +223,12 @@ export const categoryProducts = {
       ]
     }
   ],
-  'bottle-openers': [
+  'decapsuleur': [
     {
       id: 'bottle-opener-custom',
       name: 'Décapsuleur Personnalisé',
       description: 'Décapsuleur en résine personnalisé avec votre design préféré.',
-      price: 2000,
-      originalPrice: 3000,
-      discount: 33,
+      price: '1500-3500',
       images: [
         '/assets/images/products/accessoires/Décapsuleur.webp',
         '/assets/images/products/accessoires/Décapsuleur1.webp',
@@ -210,14 +242,12 @@ export const categoryProducts = {
       ]
     }
   ],
-  'bookends': [
+  'porte-livre': [
     {
       id: 'bookend-custom',
-      name: 'Serre-livres Personnalisé',
-      description: 'Serre-livres en résine pour maintenir vos livres avec style.',
-      price: 3000,
-      originalPrice: 4500,
-      discount: 33,
+      name: 'Porte Livre Personnalisé',
+      description: 'Porte livre en résine pour maintenir vos livres avec style.',
+      price: '10000',
       images: [
         '/assets/images/products/decoration/pose_livre.webp',
         '/assets/images/products/decoration/pose_livre1.webp',
@@ -231,18 +261,16 @@ export const categoryProducts = {
       ]
     }
   ],
-  'bookmarks': [
+  'marque-page': [
     {
       id: 'bookmark-custom',
       name: 'Marque-page Personnalisé',
       description: 'Marque-page en résine pour ne jamais perdre votre page.',
-      price: 1000,
-      originalPrice: 1500,
-      discount: 33,
+      price: '1000-1500',
       images: [
         '/assets/images/products/decoration/marque_page.webp',
         '/assets/images/products/decoration/marque_page1.webp',
-        '/assets/images/products/decoration/pose_livre.webp'
+        '/assets/images/products/decoration/marque_page.webp'
       ],
       colors: [
         { id: 'blue', name: 'Bleu' },
@@ -252,24 +280,23 @@ export const categoryProducts = {
       ]
     }
   ],
-  'phonecase': [
+  'pochette-portable': [
     {
       id: 'phonecase-custom',
-      name: 'Coque de Téléphone Personnalisée',
-      description: 'Coque de téléphone en résine avec votre design personnalisé.',
-      price: 2500,
-      originalPrice: 3500,
-      discount: 28,
+      name: 'Revêtement Pochette de Portable',
+      description: 'Revêtement de pochette de téléphone en résine avec votre design personnalisé.',
+      price: '1000-2500',
       images: [
         '/assets/images/products/rangement/pochette_phone.webp',
         '/assets/images/products/rangement/pochette_phone1.webp',
-        '/assets/images/products/rangement/pochette_phone2.webp'
+        '/assets/images/products/rangement/pochette_phone.webp'
       ],
       colors: [
         { id: 'blue', name: 'Bleu' },
         { id: 'pink', name: 'Rose' },
-        { id: 'clear', name: 'Transparent' },
-        { id: 'multicolor', name: 'Multicolore' }
+        { id: 'green', name: 'Vert' },
+        { id: 'purple', name: 'Violet' },
+        { id: 'transparent', name: 'Transparent' }
       ]
     }
   ]

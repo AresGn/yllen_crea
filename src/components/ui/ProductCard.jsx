@@ -42,12 +42,25 @@ const ImageContainer = styled.div`
   position: relative;
   height: 220px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  padding: 10px;
   
   img, .lazy-load-image-background {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain !important;
     transition: transform 0.5s ease;
+  }
+  
+  .image-wrapper {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
   }
   
   ${Card}:hover & img, ${Card}:hover & .lazy-load-image-background {
@@ -146,6 +159,13 @@ export const ProductCard = ({
           effect="blur"
           threshold={300}
           placeholderSrc={`${image}?width=20`}
+          wrapperClassName="image-wrapper"
+          style={{ 
+            display: 'block',
+            objectFit: 'contain',
+            maxHeight: '100%',
+            maxWidth: '100%'
+          }}
         />
       </ImageContainer>
       <CardContent>

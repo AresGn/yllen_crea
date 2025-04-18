@@ -477,6 +477,19 @@ const CustomizationOptions = ({ customizationOptions, colorOptions, formValues, 
   );
 };
 
+const OrderFormWrapper = styled.div`
+  margin-top: -20px;
+  padding-top: 0;
+  
+  @media (min-width: 768px) {
+    margin-top: -30px;
+  }
+  
+  @media (min-width: 992px) {
+    margin-top: -40px;
+  }
+`;
+
 export const CategoryPage = () => {
   const { categoryId } = useParams();
   const navigate = useNavigate();
@@ -650,13 +663,15 @@ export const CategoryPage = () => {
         
         {/* Formulaire de commande en tant que section indépendante */}
         {showOrderForm && (
-          <OrderForm 
-            colorOptions={colorOptions} 
-            product={products[0]} 
-            category={category}
-            customizationComponent={customizationComponent}
-            selectedCustomizations={formValues}
-          />
+          <OrderFormWrapper>
+            <OrderForm 
+              colorOptions={colorOptions} 
+              product={products[0]} 
+              category={category}
+              customizationComponent={customizationComponent}
+              selectedCustomizations={formValues}
+            />
+          </OrderFormWrapper>
         )}
       </Main>
       <Footer />

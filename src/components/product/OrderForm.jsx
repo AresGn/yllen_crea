@@ -4,18 +4,18 @@ import { WhatsAppButton } from '../shared/WhatsAppButton';
 
 const OrderFormContainer = styled.div`
   width: 100%;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 0;
   position: static;
   
   @media (min-width: 768px) {
     max-width: 600px;
-    margin: 2.5rem auto;
+    margin: 0.5rem auto;
   }
   
   @media (min-width: 992px) {
     max-width: 700px;
-    margin: 3rem auto;
+    margin: 1rem auto;
   }
 `;
 

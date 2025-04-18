@@ -8,6 +8,7 @@ const NavContainer = styled.nav`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  position: relative;
   
   @media (max-width: 768px) {
     .desktop-menu {
@@ -62,14 +63,24 @@ const MobileMenuToggle = styled.button`
   border: none;
   cursor: pointer;
   padding: 0.6rem;
-  z-index: 1000;
-  margin-left: auto;
+  z-index: 1500;
+  margin-right: 0;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
   
   .bar {
@@ -77,12 +88,14 @@ const MobileMenuToggle = styled.button`
     width: 30px;
     height: 3px;
     margin: 4px auto;
-    background-color: var(--text-dark, #333);
+    background-color: var(--primary-color, #333);
     transition: all 0.3s ease-in-out;
     border-radius: 2px;
   }
   
   &.open {
+    background-color: rgba(255, 255, 255, 0.95);
+    
     .bar:nth-child(1) {
       transform: translateY(7px) rotate(45deg);
     }
@@ -106,6 +119,11 @@ const MobileMenu = styled(motion.div)`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   z-index: 999;
+  border-radius: 0 0 10px 10px;
+  max-width: 96%;
+  margin: 0 auto;
+  left: 2%;
+  right: 2%;
   
   ul {
     list-style: none;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion as Motion } from 'framer-motion';
 import { WhatsAppButton } from '../shared/WhatsAppButton';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const FooterContainer = styled.footer`
   background-color: var(--background-light);
@@ -110,6 +111,40 @@ const Copyright = styled.div`
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Fonction pour gérer la navigation vers les sections
+  const scrollToSection = (sectionId) => {
+    // Si nous ne sommes pas sur la page d'accueil, naviguer d'abord vers la page d'accueil
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Attendre que la page d'accueil soit chargée pour défiler vers la section
+      setTimeout(() => {
+        scrollToElement(sectionId);
+      }, 300);
+    } else {
+      // Si nous sommes déjà sur la page d'accueil, défiler directement
+      scrollToElement(sectionId);
+    }
+  };
+  
+  // Fonction auxiliaire pour défiler vers l'élément avec l'ID
+  const scrollToElement = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80; // Ajustez cette valeur en fonction de la hauteur de votre header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      console.warn(`Section avec ID "${sectionId}" non trouvée`);
+    }
+  };
   
   return (
     <FooterContainer>
@@ -146,9 +181,9 @@ export const Footer = () => {
           >
             <h3>Navigation</h3>
             <ul>
-              <li><a href="#creations">Mes Créations</a></li>
-              <li><a href="#order-process">Comment Commander</a></li>
-              <li><a href="#about">À Propos</a></li>
+              <li><a onClick={() => scrollToSection('creations')} style={{ cursor: 'pointer' }}>Mes Créations</a></li>
+              <li><a onClick={() => scrollToSection('order-process')} style={{ cursor: 'pointer' }}>Comment Commander</a></li>
+              <li><a onClick={() => scrollToSection('about')} style={{ cursor: 'pointer' }}>À Propos</a></li>
             </ul>
           </Motion.div>
         </FooterSection>

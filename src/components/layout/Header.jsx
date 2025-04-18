@@ -16,8 +16,10 @@ const HeaderContainer = styled.header`
   right: 0;
   z-index: 1000;
   transition: all 0.3s ease;
-  background-color: ${props => props.scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'};
-  box-shadow: ${props => props.scrolled ? '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none'};
+  background-color: ${props => props.scrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.9)'};
+  box-shadow: ${props => props.scrolled ? '0 2px 10px rgba(0, 0, 0, 0.15)' : '0 1px 5px rgba(0, 0, 0, 0.05)'};
+  height: auto;
+  width: 100%;
   
   @media (min-width: 768px) {
     padding: 1rem 2rem;
@@ -35,6 +37,12 @@ const HeaderContent = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 10px;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    padding-right: 25px; /* Espace pour le bouton menu */
+  }
 `;
 
 const Logo = styled(Link)`
@@ -86,6 +94,10 @@ export const Header = () => {
     };
     
     window.addEventListener('scroll', handleScroll);
+    
+    // Ajouter un padding au corps de la page pour compenser le header fixe
+    const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+    document.body.style.paddingTop = `${headerHeight}px`;
     
     return () => {
       window.removeEventListener('scroll', handleScroll);

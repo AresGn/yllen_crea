@@ -152,6 +152,8 @@ const OrderButtonContainer = styled.div`
   width: 100%;
   margin: 1.5rem auto;
   text-align: center;
+  display: flex;
+  justify-content: center;
   
   @media (min-width: 768px) {
     max-width: 400px;

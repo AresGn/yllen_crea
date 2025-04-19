@@ -26,13 +26,20 @@ const StyledButton = styled(motion.a)`
   }
   
   i {
-    margin-right: 8px;
-    font-size: 1.2rem;
+    margin-right: 15px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
   }
   
   @media (max-width: 768px) {
     padding: ${props => props.fullWidth ? '0.8rem 1rem' : '0.7rem 1rem'};
     font-size: 0.9rem;
+    
+    i {
+      margin-right: 12px;
+      font-size: 1.3rem;
+    }
   }
 `;
 

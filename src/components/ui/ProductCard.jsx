@@ -131,7 +131,7 @@ export const ProductCard = ({
     
     // Si nous avons un ID de catégorie, naviguer vers la page de catégorie
     if (categoryId) {
-      navigate(`/category/${categoryId}`);
+      navigate(`/catalogue/${categoryId}`);
       // Faire défiler la page vers le haut
       window.scrollTo(0, 0);
     } else if (link.startsWith('#')) {
@@ -155,7 +155,7 @@ export const ProductCard = ({
       <ImageContainer>
         <LazyLoadImage
           src={image}
-          alt={title}
+          alt={`${title} - Création artisanale en résine époxy personnalisée - Fait main par Yllen Créa`}
           effect="blur"
           threshold={300}
           placeholderSrc={`${image}?width=20`}

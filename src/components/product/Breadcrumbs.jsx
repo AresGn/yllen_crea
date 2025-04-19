@@ -39,14 +39,22 @@ const BreadcrumbsContainer = styled.div`
   }
 `;
 
-const Breadcrumbs = ({ categoryName }) => {
+const Breadcrumbs = ({ categoryName, productName, categoryId }) => {
   return (
     <BreadcrumbsContainer>
       <Link to="/">Accueil</Link>
       <span>›</span>
       <Link to="/#creations">Créations</Link>
       <span>›</span>
-      {categoryName}
+      {productName ? (
+        <>
+          <Link to={`/catalogue/${categoryId}`}>{categoryName}</Link>
+          <span>›</span>
+          {productName}
+        </>
+      ) : (
+        categoryName
+      )}
     </BreadcrumbsContainer>
   );
 };

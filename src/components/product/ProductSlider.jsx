@@ -166,7 +166,7 @@ const ProductSlider = ({ images, altPrefix }) => {
           <SwiperSlide key={index}>
             <LazyLoadImage
               src={image}
-              alt={`${altPrefix} - Image ${index + 1}`}
+              alt={`${altPrefix} en résine époxy artisanal - Vue ${index + 1} - Création unique personnalisable par Yllen Créa`}
               effect="blur"
               threshold={300}
               onError={(e) => {

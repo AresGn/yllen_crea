@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yllen-crea.vercel.app/sitemap.xml
+
+# Optimisation de l'exploration
+Crawl-delay: 10 

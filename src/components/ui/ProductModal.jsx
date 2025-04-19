@@ -387,7 +387,7 @@ export const ProductModal = ({
                 <MainImage>
                   <LazyLoadImage
                     src={productImages[selectedImage]}
-                    alt={`${category.name} - Image ${selectedImage + 1}`}
+                    alt={`${category.name} - ${product?.name || 'Création personnalisée'} en résine époxy artisanale - Photo ${selectedImage + 1} - Yllen Créa`}
                     effect="blur"
                     threshold={300}
                   />
@@ -402,7 +402,7 @@ export const ProductModal = ({
                     >
                       <LazyLoadImage
                         src={image}
-                        alt={`Miniature ${index + 1}`}
+                        alt={`${category.name} - Miniature ${index + 1} - Bijou ou objet décoratif en résine - Yllen Créa`}
                         effect="blur"
                       />
                     </Thumbnail>

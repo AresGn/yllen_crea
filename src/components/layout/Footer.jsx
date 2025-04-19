@@ -159,13 +159,10 @@ export const Footer = () => {
             <h3>Yllen Créa</h3>
             <p>Des créations en résine personnalisées, uniques comme vous. Objets pratiques et symboliques pour accompagner les moments de votre vie.</p>
             <SocialIcons>
-              <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <i className="fab fa-instagram"></i>
-              </a>
               <a href="https://web.facebook.com/profile.php?id=61565851836325" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="https://pinterest.com/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+              <a href="https://pin.it/2eMwuIlvD" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
                 <i className="fab fa-pinterest-p"></i>
               </a>
             </SocialIcons>

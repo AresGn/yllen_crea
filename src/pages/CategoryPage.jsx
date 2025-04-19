@@ -12,6 +12,7 @@ import OrderForm from '../components/product/OrderForm';
 import Breadcrumbs from '../components/product/Breadcrumbs';
 import CategoryHeader from '../components/product/CategoryHeader';
 import ProductLayout from '../components/product/ProductLayout';
+import ProductSchema from '../components/schema/ProductSchema';
 
 const Page = styled.div`
   min-height: 100vh;
@@ -490,12 +491,25 @@ const OrderFormWrapper = styled.div`
   }
 `;
 
-export const CategoryPage = () => {
-  const { categoryId } = useParams();
+export const CategoryPage = ({ showProduct = false, redirectToNew = false }) => {
+  const { categoryId, productId } = useParams();
   const navigate = useNavigate();
   const [showOrderForm, setShowOrderForm] = useState(false);
   // Fusionner les deux états en un seul
   const [formValues, setFormValues] = useState({});
+  
+  // Redirection vers les nouvelles URLs si nécessaire
+  useEffect(() => {
+    if (redirectToNew) {
+      navigate(`/catalogue/${categoryId}`, { replace: true });
+      return;
+    }
+    
+    if (showProduct && productId) {
+      navigate(`/creations/${categoryId}/${productId}`, { replace: true });
+      return;
+    }
+  }, [redirectToNew, categoryId, productId, navigate, showProduct]);
   
   // Faire défiler la page vers le haut lors du chargement
   useEffect(() => {
@@ -641,8 +655,18 @@ export const CategoryPage = () => {
     setShowOrderForm(true);
   };
   
+  // URL complète pour Schema.org
+  const currentUrl = `https://yllen-crea.vercel.app/catalogue/${categoryId}`;
+  
   return (
     <Page>
+      {/* Données structurées Schema.org */}
+      <ProductSchema 
+        product={products[0]} 
+        category={category}
+        url={currentUrl}
+      />
+      
       <Header />
       <Main>
         <ProductLayout
@@ -657,8 +681,16 @@ export const CategoryPage = () => {
             </>
           }
         >
-          <Breadcrumbs categoryName={category.name} />
-          <CategoryHeader title={category.name} description={category.description} />
+          <Breadcrumbs 
+            categoryName={category.name} 
+            productName={showProduct ? products[0]?.name : null}
+            categoryId={categoryId}
+          />
+          <CategoryHeader 
+            title={category.name} 
+            description={category.description}
+            seoDescription={category.seoDescription} 
+          />
         </ProductLayout>
         
         {/* Formulaire de commande en tant que section indépendante */}

@@ -9,6 +9,7 @@ import { ContactSection } from '../components/sections/ContactSection';
 import { Calendar } from '../components/sections/Calendar';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import OrganizationSchema from '../components/schema/OrganizationSchema';
 
 const Main = styled.main`
   padding-top: 0;
@@ -29,6 +30,7 @@ export const Home = () => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
       </Helmet>
       
+      <OrganizationSchema />
       <Header />
       
       <Main>

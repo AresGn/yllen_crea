@@ -5,88 +5,88 @@ export const categories = [
   {
     id: 'porte-cle',
     name: 'Porte-clés Personnalisés',
-    description: 'Porte-clés en résine époxy personnalisables avec votre nom ou photo. Créations artisanales uniques pour vos souvenirs.',
-    seoDescription: 'Des porte-clés artisanaux en résine époxy, entièrement personnalisables avec votre nom, message ou photo. Créations uniques et durables, parfaites pour un cadeau original ou un souvenir précieux à emporter partout avec vous.',
+    description: 'Porte-clés personnalisés en résine époxy faits main au Bénin. Créations artisanales uniques pour vos souvenirs d\'Afrique de l\'Ouest.',
+    seoDescription: 'Des porte-clés artisanaux en résine époxy, entièrement personnalisables avec votre nom, message ou photo. Créations uniques et durables fabriquées à Cotonou, parfaites pour un cadeau original ou un souvenir précieux d\'Afrique à emporter partout avec vous.',
     image: '/assets/images/products/accessoires/porte_clé1.webp',
     featured: true
   },
   {
     id: 'boucles',
     name: 'Boucles d\'Oreilles',
-    description: 'Boucles d\'oreilles artisanales en résine aux couleurs vibrantes. Bijoux légers et uniques faits main.',
-    seoDescription: 'Boucles d\'oreilles artisanales en résine époxy aux couleurs vibrantes et motifs uniques. Chaque paire est façonnée à la main avec des matériaux de qualité pour sublimer votre style avec élégance et originalité.',
+    description: 'Boucles d\'oreilles artisanales en résine aux couleurs vibrantes. Bijoux légers et uniques faits main à Cotonou, Bénin.',
+    seoDescription: 'Boucles d\'oreilles artisanales en résine époxy aux couleurs vibrantes et motifs africains uniques. Chaque paire est façonnée à la main au Bénin avec des matériaux de qualité pour sublimer votre style avec l\'élégance de l\'artisanat ouest-africain.',
     image: '/assets/images/products/bijoux/boucle.webp',
     featured: true
   },
   {
     id: 'collier',
     name: 'Colliers Personnalisés',
-    description: 'Colliers en résine personnalisables avec votre nom ou message. Bijoux légers et originaux faits main.',
-    seoDescription: 'Colliers en résine époxy entièrement personnalisables avec votre nom, message ou inclusion spéciale. Bijoux légers et résistants, conçus pour ajouter une touche d\'originalité à vos tenues tout en gardant vos souvenirs précieux près de votre cœur.',
+    description: 'Colliers en résine époxy personnalisables avec votre nom ou message. Bijoux artisanaux faits main en Afrique pour un style unique.',
+    seoDescription: 'Colliers en résine époxy entièrement personnalisables avec votre nom, message ou inclusion spéciale. Bijoux légers fabriqués artisanalement au Bénin, conçus pour ajouter une touche d\'originalité africaine à vos tenues tout en gardant vos souvenirs précieux près de votre cœur.',
     image: '/assets/images/products/bijoux/colier2.webp',
     featured: true
   },
   {
     id: 'bracelet',
-    name: 'Bracelets',
-    description: 'Bracelets artisanaux en résine époxy aux finitions soignées. Créations uniques et colorées.',
-    seoDescription: 'Bracelets artisanaux en résine époxy aux finitions soignées, disponibles dans une large palette de couleurs et de styles. Créations légères et confortables pour sublimer votre poignet avec une pièce unique faite à la main en France.',
+    name: 'Bracelets en Résine',
+    description: 'Bracelets artisanaux en résine époxy aux finitions soignées. Créations uniques et colorées de l\'artisanat du Bénin.',
+    seoDescription: 'Bracelets artisanaux en résine époxy aux finitions soignées, disponibles dans une large palette de couleurs inspirées de l\'Afrique. Créations légères et confortables pour sublimer votre poignet avec une pièce unique faite à la main à Cotonou, Bénin.',
     image: '/assets/images/products/bijoux/Bracelet4.webp',
     featured: false
   },
   {
     id: 'boite-bijoux',
     name: 'Boîtes à Bijoux',
-    description: 'Écrins de rangement en résine pour protéger vos bijoux avec style. Créations personnalisables.',
-    seoDescription: 'Écrins de rangement en résine époxy pour protéger vos bijoux avec style. Chaque boîte est une œuvre d\'art unique, fabriquée à la main avec des matériaux de qualité, personnalisable selon vos goûts pour sublimer votre coiffeuse.',
+    description: 'Écrins de rangement en résine époxy faits main au Bénin pour protéger vos bijoux. Créations africaines personnalisables.',
+    seoDescription: 'Écrins de rangement en résine époxy pour protéger vos bijoux avec style. Chaque boîte est une œuvre d\'art unique de l\'artisanat béninois, fabriquée à la main avec des matériaux de qualité, personnalisable selon vos goûts pour sublimer votre intérieur avec une touche d\'Afrique de l\'Ouest.',
     image: '/assets/images/products/rangement/Boite_bijoux.webp',
     featured: false
   },
   {
     id: 'decapsuleur',
     name: 'Décapsuleurs',
-    description: 'Décapsuleurs en résine personnalisables avec votre design. Accessoires pratiques et décoratifs.',
-    seoDescription: 'Décapsuleurs en résine époxy alliant fonctionnalité et esthétique. Objets pratiques du quotidien transformés en accessoires décoratifs uniques, personnalisables avec logos, couleurs ou inclusions pour un cadeau original et utile.',
+    description: 'Décapsuleurs en résine personnalisables avec votre design. Accessoires pratiques et décoratifs faits main à Cotonou.',
+    seoDescription: 'Décapsuleurs en résine époxy alliant fonctionnalité et esthétique africaine. Objets pratiques du quotidien transformés en accessoires décoratifs uniques par des artisans béninois, personnalisables avec logos, couleurs ou inclusions pour un cadeau original d\'Afrique de l\'Ouest.',
     image: '/assets/images/products/accessoires/Décapsuleur.webp',
     featured: false
   },
   {
     id: 'porte-verre',
-    name: 'Porte-verres',
-    description: 'Dessous de verre en résine époxy aux motifs variés. Protégez vos surfaces avec élégance.',
-    seoDescription: 'Dessous de verre en résine époxy aux motifs et couleurs variés pour protéger vos surfaces avec élégance. Objets décoratifs artisanaux, hautement personnalisables, qui apportent une touche d\'originalité à votre intérieur tout en étant résistants et faciles d\'entretien.',
+    name: 'Dessous de Verre Personnalisés',
+    description: 'Dessous de verre en résine époxy aux motifs africains variés. Protégez vos surfaces avec l\'élégance de l\'artisanat béninois.',
+    seoDescription: 'Dessous de verre en résine époxy aux motifs et couleurs inspirés de l\'Afrique pour protéger vos surfaces avec élégance. Objets décoratifs artisanaux du Bénin, hautement personnalisables, qui apportent une touche d\'originalité à votre intérieur tout en étant résistants et faciles d\'entretien.',
     image: '/assets/images/products/decoration/Porte_verre.webp',
     featured: true
   },
   {
     id: 'porte-livre',
     name: 'Porte-livres',
-    description: 'Serre-livres en résine pour organiser votre bibliothèque avec style. Pièces décoratives uniques.',
-    seoDescription: 'Serre-livres artisanaux en résine époxy pour organiser votre bibliothèque avec style. Pièces uniques et fonctionnelles, conçues pour maintenir vos livres tout en ajoutant une touche artistique et personnelle à votre espace de lecture ou bureau.',
+    description: 'Serre-livres en résine époxy fabriqués à Cotonou pour organiser votre bibliothèque avec style africain. Pièces décoratives uniques.',
+    seoDescription: 'Serre-livres artisanaux en résine époxy pour organiser votre bibliothèque avec le style unique du Bénin. Pièces uniques et fonctionnelles, conçues par des artisans africains pour maintenir vos livres tout en ajoutant une touche artistique et personnelle à votre espace de lecture ou bureau.',
     image: '/assets/images/products/decoration/pose_livre.webp',
     featured: false
   },
   {
     id: 'marque-page',
-    name: 'Marque-pages',
-    description: 'Marque-pages en résine aux designs exclusifs. Accessoires de lecture pratiques et personnalisables.',
-    seoDescription: 'Marque-pages en résine époxy aux designs exclusifs pour ne jamais perdre le fil de votre lecture. Accessoires pratiques et durables, fabriqués à la main avec soin, personnalisables avec votre texte, photo ou inclusion spéciale pour un cadeau littéraire unique.',
+    name: 'Marque-pages en Résine',
+    description: 'Marque-pages en résine époxy aux designs exclusifs africains. Accessoires de lecture artisanaux et personnalisables du Bénin.',
+    seoDescription: 'Marque-pages en résine époxy aux designs exclusifs inspirés de l\'Afrique pour ne jamais perdre le fil de votre lecture. Accessoires pratiques et durables, fabriqués à la main avec soin à Cotonou, personnalisables avec votre texte, photo ou inclusion spéciale pour un cadeau littéraire unique venu du Bénin.',
     image: '/assets/images/products/decoration/marque_page.webp',
     featured: false
   },
   {
     id: 'pochette-portable',
     name: 'Pochettes de Portable',
-    description: 'Revêtements de protection pour téléphone en résine. Personnalisez votre smartphone avec style.',
-    seoDescription: 'Revêtements de protection pour téléphone en résine époxy, alliant style et durabilité. Créations sur-mesure pour personnaliser votre smartphone avec un design unique qui le protège des rayures tout en reflétant votre personnalité.',
+    description: 'Revêtements de protection pour téléphone en résine époxy faits main au Bénin. Personnalisez votre smartphone avec le style africain.',
+    seoDescription: 'Revêtements de protection pour téléphone en résine époxy, alliant style africain et durabilité. Créations sur-mesure de l\'artisanat béninois pour personnaliser votre smartphone avec un design unique qui le protège des rayures tout en reflétant l\'art de l\'Afrique de l\'Ouest.',
     image: '/assets/images/products/rangement/pochette_phone.webp',
     featured: true
   },
   {
     id: 'porte-cle-entreprise',
     name: 'Porte-clés Entreprise',
-    description: 'Porte-clés en résine personnalisables avec votre logo d\'entreprise. Disponibles en grande quantité.',
-    seoDescription: 'Porte-clés corporatifs en résine époxy, personnalisables avec votre logo d\'entreprise et disponibles en grande quantité. Solution idéale pour les goodies professionnels, cadeaux d\'affaires ou événements d\'entreprise, alliant qualité artisanale et personnalisation sur-mesure.',
+    description: 'Porte-clés en résine personnalisables avec votre logo d\'entreprise. Fabrication artisanale au Bénin, disponibles en grande quantité.',
+    seoDescription: 'Porte-clés corporatifs en résine époxy, personnalisables avec votre logo d\'entreprise et disponibles en grande quantité. Solution idéale pour les goodies professionnels, cadeaux d\'affaires ou événements d\'entreprise, alliant savoir-faire artisanal béninois et personnalisation sur-mesure avec livraison dans toute l\'Afrique de l\'Ouest.',
     image: '/assets/images/products/accessoires/porte_clé4.webp',
     featured: false
   }

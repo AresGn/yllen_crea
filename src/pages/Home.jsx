@@ -19,11 +19,11 @@ export const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Yllen Créa | Créations en résine personnalisées</title>
-        <meta name="description" content="Yllen Créa - Des créations en résine personnalisées, uniques comme vous. Objets pratiques et symboliques pour accompagner les moments de votre vie." />
-        <meta name="keywords" content="résine, bijoux, porte-clés, personnalisé, artisanat, accessoires, cadeaux personnalisés, créations" />
-        <meta property="og:title" content="Yllen Créa | Créations en résine personnalisées" />
-        <meta property="og:description" content="Des créations en résine personnalisées, uniques comme vous. Chez Yllen Créa, chaque pièce raconte une histoire — la vôtre." />
+        <title>Yllen Créa | Bijoux et Accessoires en Résine Époxy Artisanaux au Bénin</title>
+        <meta name="description" content="Yllen Créa - Créations artisanales en résine époxy personnalisées au Bénin. Bijoux, porte-clés et objets décoratifs uniques faits main pour des cadeaux originaux en Afrique de l'Ouest." />
+        <meta name="keywords" content="bijoux résine, porte-clés résine, résine époxy bijoux, objets décoratifs résine, accessoires en résine, marque-page résine, bijoux artisanaux, porte-clés personnalisé résine époxy Bénin, bijoux résine époxy fait main Afrique, boucles d'oreilles résine artisanale Cotonou, bracelets en résine colorés africains, objets décoratifs résine époxy Afrique de l'Ouest, dessous de verre résine personnalisés Bénin, cadeaux artisanaux résine livraison Bénin, collier résine nom personnalisé Afrique, artisan résine Bénin, créations artisanales Afrique, bijoux fait main Cotonou, boutique résine époxy Bénin, artisanat résine Afrique de l'Ouest" />
+        <meta property="og:title" content="Yllen Créa | Bijoux et Accessoires en Résine Époxy Artisanaux au Bénin" />
+        <meta property="og:description" content="Découvrez nos créations artisanales en résine époxy personnalisées. Bijoux, porte-clés et objets décoratifs uniques faits main au Bénin, parfaits pour des cadeaux originaux en Afrique de l'Ouest." />
         <meta property="og:image" content="/assets/images/og-image.webp" />
         <meta property="og:url" content="https://yllencrea.com" />
         <meta property="og:type" content="website" />

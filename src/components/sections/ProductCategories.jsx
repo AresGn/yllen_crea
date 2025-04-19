@@ -114,10 +114,11 @@ export const ProductCategories = () => {
   return (
     <Section id="creations" ref={ref}>
       <SectionHeader>
-        <h2>Mes Créations</h2>
+        <h2>Créations Artisanales en Résine Époxy</h2>
         <p>
-          Découvrez mes créations en résine personnalisées. Chaque pièce est unique, 
-          fabriquée à la main avec soin et passion pour capturer vos souvenirs précieux.
+          Découvrez notre collection de bijoux résine et d'objets décoratifs en résine époxy 
+          faits main au Bénin. Chaque pièce est unique, fabriquée avec passion dans notre atelier 
+          à Cotonou pour vous offrir des accessoires personnalisés de qualité.
         </p>
       </SectionHeader>
       
@@ -126,13 +127,13 @@ export const ProductCategories = () => {
           active={filter === 'all'} 
           onClick={() => setFilter('all')}
         >
-          Toutes les catégories
+          Tous nos bijoux artisanaux
         </TabButton>
         <TabButton 
           active={filter === 'featured'} 
           onClick={() => setFilter('featured')}
         >
-          Populaires
+          Créations populaires en Afrique
         </TabButton>
       </CategoryTabs>
       

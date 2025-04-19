@@ -126,7 +126,7 @@ export const HeroBanner = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Ta mémoire en résine, unique comme toi.
+          Bijoux et accessoires en résine époxy faits main au Bénin
         </Slogan>
         
         <ButtonsContainer
@@ -135,12 +135,12 @@ export const HeroBanner = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <CTAButton 
-            text="Découvrir les créations" 
+            text="Découvrir nos créations artisanales" 
             onClick={scrollToCreations}
             primary
           />
           <CTAButton 
-            text="Commander" 
+            text="Commander des bijoux personnalisés" 
             href="#order-process"
           />
         </ButtonsContainer>
@@ -152,7 +152,7 @@ export const HeroBanner = () => {
         transition={{ delay: 1.2, duration: 0.5 }}
         onClick={scrollToCreations}
       >
-        <p>Découvrir</p>
+        <p>Découvrir l'artisanat en résine du Bénin</p>
         <div className="arrow"></div>
       </ScrollIndicator>
     </BannerContainer>
